@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummarEase - Summarize YouTube Videos</title>
+    
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- CSS & JavaScript -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">SummarEase</div>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-button">Home</a></li>
+            <li><a href="features.html" class="nav-button">Features</a></li>
+            <li><a href="about.html" class="nav-button">About</a></li>
+            <li><a href="contact.html" class="nav-button">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Summarize YouTube Videos Instantly!</h1>
+            <p>Enter a YouTube video link to get a quick AI-powered summary.</p>
+
+            <!-- Input Form -->
+            <form id="url-form" class="input-area">
+                <input type="text" id="video-url" placeholder="Paste YouTube video link here..." required>
+                <button type="submit" id="summarize-button">Summarize</button>
+            
+            <!-- ✅ Loading Spinner (Initially Hidden) -->
+            <div id="loading-spinner" style="display: none;">
+                <img src="{{ url_for('static', filename='spinner.gif') }}" alt="Loading..." width="50">
+            </div>
+
+            </form>
+        </div>
+
+        <!-- YouTube Logo -->
+        <div class="hero-logo">
+            <img src="{{ url_for('static', filename='youtube-icon.png') }}" alt="YouTube Icon">
+        </div>
+    </section>
+
+    <!-- Summary Output Section -->
+    <section id="summary-container" class="summary-output" style="display: block;">
+        <h2 id="summary-title">Summary</h2>
+        <p id="summary-text">Your summary will appear here once you enter a video link.</p>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="download-summary-pdf" >Download PDF</button>
+            <button id="watch-video">Watch Video</button>
+            <button id="clear-button">Clear Summary</button>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="mr">Marathi</option>
+            </select>
+        </div>
+
+        <!-- Video Player -->
+            <div id="video-container" class="video-container" style="display: none;">
+            <iframe id="video-frame" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+            <button id="close-video" class="close-video">Close Video</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 SummarEase. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
+

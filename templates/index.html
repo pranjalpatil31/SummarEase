@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummarEase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">SummarEase</div>
+
+        <ul class="nav-links">
+            <li><a href="#hero" class="nav-button">Home</a></li>
+            <li><a href="features.html" class="nav-button">Features</a></li>
+            <li><a href="about.html" class="nav-button">About</a></li>
+            <li><a href="contact.html" class="nav-button">Contact</a></li>
+        </ul>
+        
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SummarEase Logo">
+        </div>
+        <div class="hero-content">
+            <h1>Summarize YouTube Videos in Seconds!</h1>
+            <p>Our AI-powered tool helps you extract key insights from YouTube videos effortlessly. Save time and get concise summaries instantly.</p>
+            <a href="main.html" class="cta-button">Try Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 SummarEase. All Rights Reserved.</p>
+    </footer>
+    <script src="/static/script.js"></script>
+</body>
+</html>
