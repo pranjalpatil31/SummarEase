@@ -1,3 +1,6 @@
+create venv
+
+
 Flask==2.2.3
 youtube-transcript-api==0.5.1
 transformers==4.27.4
