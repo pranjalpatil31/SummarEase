@@ -188,7 +188,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 2rem auto;
-    max-width: 800px;
+    max-width: 1200px;
 }
 
 .summary-output h2 {
@@ -230,6 +230,58 @@ body {
 .action-buttons button:hover {
     background-color: #ff5722;
 }
+
+.translation-container {
+    margin-top: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+#translate-btn, #share-btn {
+    background-color: #ff4652;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.7rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#translate-btn:hover, #share-btn:hover {
+    background-color: #ff5722;
+}
+
+.dropdown-list {
+    display: none;
+    position: absolute;
+    background-color: #ff4652;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.dropdown-list div {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dropdown-list div:hover {
+    background-color: #ff5722;
+}
+
+.show {
+    display: block;
+}
+
 
 /* Watch Video Section */
 .video-container {
@@ -411,8 +463,257 @@ body {
     animation: slideUp 1s ease-in-out;
 }
 
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #c72626;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInBounce 0.8s ease-in-out;
+}
 
+/* Animation */
+@keyframes fadeInBounce {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
 
+.rate-us-container {
+    background-color: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+}
 
+@keyframes fadeInScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 
+.rate-us-container {
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+}
 
+@keyframes fadeInScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.rate-us-container {
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.rate-us-container {
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    animation: fadeInScale 0.8s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.rate-us-container {
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.rate {
+    display: flex;
+    justify-content: center;
+    direction: rtl; /* Right to left for star order */
+    gap: 5px;
+}
+
+.rate input {
+    display: none; /* Hide radio buttons */
+}
+
+.rate label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.rate input:checked ~ label {
+    color: #ffd700; /* Gold for selected stars */
+}
+
+.comment-box {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    resize: none;
+    margin-top: 10px;
+}
+
+.submit-button {
+    background-color: #ee1809;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #dd490a;
+}
+
+.message {
+    margin-top: 15px;
+    color: rgb(226, 91, 23);
+    display: none;
+}
+
+.contact-info {
+    background: #ffffff; /* Light background to differentiate from form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 40px auto;
+    width: 80%;
+    max-width: 800px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.contact-info:hover {
+    transform: translateY(-5px); /* Subtle hover effect */
+
+}
+
+.contact-info h2 {
+    color: #D7263D;
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.contact-info p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    font-size: 16px;
+    color: #444;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.contact-info a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.contact-info a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
