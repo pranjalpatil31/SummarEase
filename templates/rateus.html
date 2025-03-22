@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummarEase - Contact</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="/static/styles.css">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">SummarEase</div>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-button">Home</a></li>
+            <li><a href="features.html" class="nav-button">Features</a></li>
+            <li><a href="about.html" class="nav-button">About</a></li>
+            <li><a href="contact.html" class="nav-button">Contact</a></li>
+            <li><a href="rateus.html" class="nav-button">Rate Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Rate Us Container -->
+    <div class="rate-us-container">
+        <h2>Rate Us</h2>
+
+        <!-- Star Rating System -->
+        <form id="feedback-form" method="POST" action="/submit-feed">
+        <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5">
+            <label for="star5" title="5 stars">&#9733;</label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4" title="4 stars">&#9733;</label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3" title="3 stars">&#9733;</label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2" title="2 stars">&#9733;</label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1" title="1 star">&#9733;</label>
+        </div>
+        <textarea class="comment-box" name="comment" placeholder="Any comments..."></textarea>
+        <button class="submit-button" id="submit-btn" type="submit">Submit</button>
+        <p id="sub-status" class="sub-status"></p>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 SummarEase. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
