@@ -6,9 +6,10 @@
     <title>SummarEase - Contact</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="/static/styles.css">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-<body>
+<body >
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -18,15 +19,17 @@
             <li><a href="features.html" class="nav-button">Features</a></li>
             <li><a href="about.html" class="nav-button">About</a></li>
             <li><a href="contact.html" class="nav-button">Contact</a></li>
+            <li><a href="rateus.html" class="nav-button">Rate </a></li>
         </ul>
     </nav>
 
     <!-- Contact Section -->
 <section class="contact">
     <h1 class="fade-in">Contact Us</h1>
-    <p class="fade-in">Have questions or feedback? Reach out to us using the form below.</p>
+    <p class="fade-in">Have any questions ? Reach out to us using the form below.</p>
 
-    <form id="contact-form" class="contact-form slide-up">
+        <form id="contact-form" class="contact-form slide-up" method="POST" action="/submit-form">
+            
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
@@ -43,7 +46,15 @@
 
 </section>
 
-
+<section class="contact-info" >
+    <h2>Contact SummarEase Admin</h2>
+    <p>For professional inquiries, you can reach out to our admin:</p>
+    <ul>
+        <li><strong>Email:</strong> <a href="mailto:summarease.admin@gmail.com">summarease.admin@gmail.com</a></li>
+        <li><strong>Phone:</strong> +1 (234) 567-8901</li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/summarease" target="_blank">SummarEase LinkedIn</a></li>
+    </ul>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
