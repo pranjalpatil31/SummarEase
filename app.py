@@ -1,14 +1,17 @@
 import logging
-from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
+from flask import Flask, render_template, request, jsonify, send_from_directory, send_file,  redirect, url_for
 from youtube_transcript_api import YouTubeTranscriptApi
 import re
 from transformers import pipeline
+import csv
 import os
 from fpdf import FPDF
 import yt_dlp  
 import requests
 import openai  # OpenAI API for grammar correction
 from deep_translator import GoogleTranslator
+from google.cloud import translate
+
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
@@ -28,6 +31,10 @@ def about():
 def contact():
     return render_template("contact.html")
 
+@app.route("/rateus.html")  
+def rateus():
+    return render_template("rateus.html")
+
 @app.route("/main.html")
 def main():
     return render_template("main.html")
@@ -35,6 +42,55 @@ def main():
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+# Create 'contact_responses.csv' if it doesn't exist
+CSV_FILE = "contact_responses.csv"
+if not os.path.exists(CSV_FILE):
+    with open(CSV_FILE, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Email", "Message"])  # CSV Headers
+
+CSV_FILE = "contact_responses.csv"
+
+# Create CSV file if it doesn't exist
+if not os.path.exists(CSV_FILE):
+    with open(CSV_FILE, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Email", "Message"])
+
+@app.route('/submit-form', methods=['POST'])
+def submit_form():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    message = request.form.get('message')
+
+    # Save data to CSV
+    with open(CSV_FILE, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([name, email, message])
+
+    # Redirect to success page
+    return redirect(url_for('success_page'))
+
+@app.route('/success')
+def success_page():
+    return render_template('success.html')
+
+@app.route('/submit-feed', methods=['POST'])
+def submit_feedback():
+    rating = request.form.get('rating')
+    comment = request.form.get('comment')
+
+    if rating:
+        print(f"Rating: {rating}, Comment: {comment}")
+        return redirect(url_for('success_page'))  # Change redirect to match success page
+    else:
+        return "Failed", 400
+
+@app.route('/feedback-success')
+def feedback_success():
+    return render_template('success.html')
+
 
 def get_video_title(video_url):
     try:
@@ -177,6 +233,7 @@ def download_summary_pdf():
     except Exception as e:
         app.logger.error(f"Error generating PDF: {str(e)}")
         return jsonify({"error": f"An error occurred while trying to generate the PDF: {str(e)}"})
+
     
 @app.route("/translate", methods=["POST"])
 def translate_text():
@@ -185,17 +242,20 @@ def translate_text():
         text = data.get("text", "")
         target_lang = data.get("target_lang", "en")
 
-        if not text:
+        if not text.strip():
             return jsonify({"error": "No text provided"}), 400
 
         translator = GoogleTranslator(source="auto", target=target_lang)
         translated_text = translator.translate(text)
 
+        if not translated_text.strip():
+            raise Exception("Empty translation result")
+
         return jsonify({"translated_text": translated_text})
-    
+
     except Exception as e:
-        print("Translation Error:", str(e))  # ✅ Debugging print
-        return jsonify({"error": str(e)}), 500
+        print("Translation Error:", str(e))  # Debugging
+        return jsonify({"error": "Translation service is currently unavailable. Please try again later."}), 500
 
 
 if __name__ == '__main__':
