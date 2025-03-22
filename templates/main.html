@@ -21,6 +21,7 @@
             <li><a href="features.html" class="nav-button">Features</a></li>
             <li><a href="about.html" class="nav-button">About</a></li>
             <li><a href="contact.html" class="nav-button">Contact</a></li>
+            <li><a href="rateus.html" class="nav-button">Rate Us</a></li>
         </ul>
     </nav>
 
@@ -53,19 +54,36 @@
     <section id="summary-container" class="summary-output" style="display: block;">
         <h2 id="summary-title">Summary</h2>
         <p id="summary-text">Your summary will appear here once you enter a video link.</p>
-
+        
         <!-- Action Buttons -->
         <div class="action-buttons">
             <button id="download-summary-pdf" >Download PDF</button>
             <button id="watch-video">Watch Video</button>
             <button id="clear-button">Clear Summary</button>
-            <select id="language-select">
-                <option value="en">English</option>
-                <option value="hi">Hindi</option>
-                <option value="mr">Marathi</option>
-            </select>
         </div>
 
+        <div class="translation-container">
+            <button id="translate-btn">Translate ▼</button>
+            <div class="dropdown-list" id="language-dropdown">
+                <div data-lang="fr">French</div>
+                <div data-lang="it">Italian</div>
+                <div data-lang="en">English</div>
+                <div data-lang="hi">Hindi</div>
+                <div data-lang="mr">Marathi</div>
+            </div>
+        </div>
+
+        <!-- Share Summary Container -->
+        <div class="translation-container">
+            <button id="share-btn" onclick="toggleShareDropdown()">Share ▼</button>
+            <div class="dropdown-list" id="share-dropdown" style="display: none;">
+                <div onclick="shareWhatsApp()">WhatsApp</div>
+                <div onclick="shareTelegram()">Telegram</div>
+                <div onclick="shareTwitter()">Twitter</div>
+                <div onclick="copyToClipboard()">Copy to Clipboard</div>
+            </div>
+        </div>
+        
         <!-- Video Player -->
             <div id="video-container" class="video-container" style="display: none;">
             <iframe id="video-frame" width="560" height="315" frameborder="0" allowfullscreen></iframe>
