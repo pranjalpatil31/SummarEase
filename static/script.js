@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+
     // 🎯 Close video button functionality
     document.getElementById("close-video").addEventListener("click", () => {
         document.getElementById("video-container").style.display = "none";
@@ -161,23 +162,183 @@ if (contactForm) {
     });
 }
 
-document.getElementById("language-select").addEventListener("change", function () {
-    const selectedLanguage = this.value;
-    const summaryText = document.getElementById("summary-text").innerText;
+document.getElementById("translate-btn").addEventListener("click", function () {
+    document.getElementById("language-dropdown").classList.toggle("show");
+});
 
-    if (summaryText.trim() === "Your summary will appear here once you enter a video link.") return;
+document.querySelectorAll("#language-dropdown div").forEach(item => {
+    item.addEventListener("click", function () {
+        const selectedLanguage = this.getAttribute("data-lang");
+        const summaryText = document.getElementById("summary-text").innerText;
 
-    // Call API to translate summary
-    fetch("/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: summaryText, target_lang: selectedLanguage })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.translated_text) {
-            document.getElementById("summary-text").innerText = data.translated_text;
+        if (summaryText.trim() === "Your summary will appear here once you enter a video link.") return;
+
+        // Show selected language on button
+        document.getElementById("translate-btn").innerText = `Translate: ${this.innerText} ▼`;
+
+        // Call API to translate summary
+        fetch("/translate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: summaryText, target_lang: selectedLanguage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.translated_text) {
+                document.getElementById("summary-text").innerText = data.translated_text;
+            } else {
+                document.getElementById("summary-text").innerText = "Translation failed. Please try again.";
+            }
+        })
+        .catch(error => {
+            console.error("Translation error:", error);
+            document.getElementById("summary-text").innerText = "An error occurred during translation.";
+        });
+
+        // Close dropdown after selection
+        document.getElementById("language-dropdown").classList.remove("show");
+    });
+});
+
+// Close dropdown if clicked outside
+window.addEventListener("click", function (e) {
+    if (!e.target.matches("#translate-btn")) {
+        document.getElementById("language-dropdown").classList.remove("show");
+    }
+});
+
+// share
+
+function toggleShareDropdown() {
+    const dropdown = document.getElementById("share-dropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+}
+
+function getSummaryText() {
+    let summaryElement = document.getElementById("summary-text");
+    return summaryElement.innerText.trim();
+}
+
+function shareWhatsApp() {
+    let summary = getSummaryText();
+    if (!summary || summary === "Your summary will appear here once you enter a video link.") {
+        alert("Please generate a summary before sharing.");
+        return;
+    }
+
+    let encodedSummary = encodeURIComponent(summary);
+
+    // Check if user has WhatsApp Desktop installed
+    let desktopLink = "whatsapp://send?text=" + encodedSummary;
+    let webLink = "https://wa.me/?text=" + encodedSummary;
+
+    // Try opening WhatsApp Desktop first
+    window.location.href = desktopLink;
+
+    // Fallback: Open WhatsApp Web if Desktop app isn’t available
+    setTimeout(() => {
+        window.open(webLink, "_blank");
+    }, 1000); // Delay ensures WhatsApp Desktop gets priority
+
+    alert("If you’re not logged in to WhatsApp Web, please scan the QR code when prompted.");
+    let url = "https://wa.me/?text=" + encodeURIComponent(summary);
+    window.open(url, "_blank");
+}
+
+
+function shareTelegram() {
+    let summary = getSummaryText();
+    if (!summary || summary === "Your summary will appear here once you enter a video link.") {
+        alert("Please generate a summary before sharing.");
+        return;
+    }
+    let url = "https://t.me/share/url?text=" + encodeURIComponent(summary);
+    window.open(url, "_blank");
+}
+
+function shareTwitter() {
+    let summary = getSummaryText();
+    if (!summary || summary === "Your summary will appear here once you enter a video link.") {
+        alert("Please generate a summary before sharing.");
+        return;
+    }
+    let url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(summary);
+    window.open(url, "_blank");
+}
+
+function copyToClipboard() {
+    let summary = getSummaryText();
+    if (!summary || summary === "Your summary will appear here once you enter a video link.") {
+        alert("Please generate a summary before copying.");
+        return;
+    }
+    navigator.clipboard.writeText(summary).then(() => {
+        alert("Summary copied to clipboard!");
+    });
+}
+
+document.getElementById('contact-form').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent page refresh
+
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch('/submit-form', {  // Ensure route matches your Flask endpoint
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.text();
+
+        if (response.ok) {
+            document.getElementById('form-status').textContent = "Your message sent successfully!";
+            document.getElementById('form-status').style.color = "green";
+            this.reset();  // Clear the form after submission
+        } else {
+            document.getElementById('form-status').textContent = "Failed to send message.";
+            document.getElementById('form-status').style.color = "red";
         }
-    })
-    .catch(error => console.error("Translation error:", error));
+    } catch (error) {
+        document.getElementById('form-status').textContent = "Error sending message.";
+        document.getElementById('form-status').style.color = "red";
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll('.rate input');
+    const submitButton = document.getElementById('submit-btn');
+    const feedbackMessage = document.getElementById('feedback-message');
+
+    submitButton.addEventListener('click', function () {
+        const selectedStar = document.querySelector('.rate input:checked');
+
+        if (!selectedStar) {
+            alert("Please select a rating before submitting.");
+        } else {
+            feedbackMessage.style.display = "block";
+        }
+    });
+});
+
+document.getElementById('feedback-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch('/submit-feed', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            window.location.href = '/success';  // Change redirect path to match success route
+        } else {
+            document.getElementById('sub-status').textContent = "Failed to submit feedback.";
+            document.getElementById('sub-status').style.color = "red";
+        }
+    } catch (error) {
+        document.getElementById('sub-status').textContent = "Error submitting feedback.";
+        document.getElementById('sub-status').style.color = "red";
+    }
 });
