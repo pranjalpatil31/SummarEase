@@ -1,6 +1,3 @@
-create venv
-
-
 Flask==2.2.3
 youtube-transcript-api==0.5.1
 transformers==4.27.4
@@ -11,38 +8,9 @@ fpdf
 gtts 
 nltk
 yt-dlp
-yt-dlp --timeout=120
-yt-dlp --index-url=https://pypi.org/simple
 reportlab
 newspaper3k
 fpdf
 imageio[ffmpeg]
 openai
 deep_translator
-
-
-
-
-https://youtu.be/Sc850jqMcwo
-Welcome to Crash Course 2019 , 1:34
-
-
-https://youtu.be/ukzFI9rgwfU?si=lFyHv62yUSppM9Gb
-Machine learning , 7:51
-
-
-https://youtu.be/fZ1Gkc2Cfqs?si=db3Dy4tSrOK2JyET
-50 Geography Facts About India ,8:58
-
-
-
-https://youtu.be/c0m6yaGlZh4?si=U3P6nw-Bx6aNQm8V
-What is Artificial Intelligence?
-
-https://www.youtube.com/watch?v=OMbsGBlpP30
-the power of habit (this is not working)
-
-app.py works less efficiently
-app 1.py works efficiently
-app 2 is modified with frontend {working}
-
