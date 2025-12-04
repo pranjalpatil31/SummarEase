@@ -31,13 +31,13 @@ It’s fast, multilingual, and incredibly user-friendly.
 
 ## ✨ Features
 
-* 🔹 **AI-Powered Summaries** using NLP models
-* 🔹 **Bullet Point Summaries** for quick understanding
-* 🔹 **Multilingual support**: English, Hindi, Marathi, French & Italian
-* 🔹 **Offline Mode** — Download summaries anytime
-* 🔹 **Watch Video** from within the interface
-* 🔹 **Text Editing Tools**: Bold, Italic, Highlight, Font Size
-* 🔹 **Share Summaries** easily across platforms
+🔹 **AI-Powered Summaries** using NLP models
+🔹 **Bullet Point Summaries** for quick understanding
+🔹 **Multilingual support**: English, Hindi, Marathi, French & Italian
+🔹 **Offline Mode** — Download summaries anytime
+🔹 **Watch Video** from within the interface
+🔹 **Text Editing Tools**: Bold, Italic, Highlight, Font Size
+🔹 **Share Summaries** easily across platforms
 
 ---
 
@@ -47,7 +47,7 @@ It’s fast, multilingual, and incredibly user-friendly.
 | -------- | ---------------------- |
 | Frontend | HTML, CSS, JavaScript  |
 | Backend  | Python, Flask          |
-| NLP      | Transformers, TextRank |
+| NLP      | Transformers           |
 | APIs     | YouTube Transcript API |
 
 ---
@@ -78,7 +78,7 @@ python backend/app.py
 4️⃣ Open your browser and go to:
 
 ```
-http://localhost:5000/
+http://localhost:3000/
 ```
 
 ---
@@ -121,7 +121,6 @@ SummarEase/
 * Support for more global languages
 * Summary-to-PPT generation
 * Dark Mode UI
-* Cloud storage for summaries
 * User authentication & personalization
 
 ---
