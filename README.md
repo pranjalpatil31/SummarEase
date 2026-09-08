@@ -132,6 +132,10 @@ Feel free to fork the repository and submit a pull request.
 
 ---
 
+## 🎥 Project Demo
+
+[▶️ **Watch SummarEase Demo**](./SummerEase%20(1).mp4)
+
 ## 📜 License
 
 This project is licensed under the **MIT License**.
